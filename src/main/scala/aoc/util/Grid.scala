@@ -4,9 +4,11 @@ package util
 import cats.syntax.all.*
 import cats.{Eval, Foldable, Functor, Show}
 
+import scala.collection.immutable.ListMap
+
 case class Grid[A](data: Vector[Vector[(A, Vec2)]]):
-  lazy val points: Map[Vec2, A] =
-    data.foldLeft(Map.empty[Vec2, A]):
+  lazy val points: ListMap[Vec2, A] =
+    data.foldLeft(ListMap.empty[Vec2, A]):
       case (points, as) =>
         points ++ as.foldLeft(points):
           case (points, (a, point)) => points.updated(point, a)
@@ -39,6 +41,9 @@ case class Grid[A](data: Vector[Vector[(A, Vec2)]]):
     data.foldl(b): (b, vec) =>
       vec.foldl(b):
         case (b, (a, xy)) => f(b, (xy, a))
+
+  val width: Int  = data.headOption.map(_.size).getOrElse(0)
+  val height: Int = data.size
 
 object Grid:
   def chars(input: String): Grid[Char] =
