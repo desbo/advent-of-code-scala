@@ -22,12 +22,12 @@ class Day7Test extends munit.FunSuite {
 
   test("example") {
     val p = Day7.parse(sample)
-    assertEquals(Day7.part1(p), 21)
+    assertEquals(Day7.part1(p), 21L)
   }
 
   test("example p2 ") {
     val p = Day7.parse(sample)
-    assertEquals(Day7.part2(p), 40)
+    assertEquals(Day7.part2(p), 40L)
   }
 
   test("more p2") {
